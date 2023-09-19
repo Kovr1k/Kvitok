@@ -11,10 +11,13 @@ class Main(View):
 class Cases(View):
     def get(self, request):
         cases = Case.objects.all()
-
+        
         i=0
         for el in cases:
-            cases[i].title = cases[i].title.replace(' ', '_')
+            # cases[i].titleForURL = cases[i].title.replace(' ', '_')
+            cases[i].titleForURL = translit(cases[i].title.replace(' ', '_'), language_code='ru', reversed=True)
+            print(cases[i].titleForURL)
+            print(cases[i].id)
             i += 1      
             
         data = {
@@ -31,9 +34,9 @@ class Error(View):
         return render(request, "error/errorPage.html")
         
 class CasePage(View):
-    def get(self, request, id, title):
+    def get(self, request, id, titleForURL):
         id = int(id)
-        title = str(title)
+        titleForURL = str(titleForURL)
         data = None
 
         if(id == None):
@@ -41,16 +44,14 @@ class CasePage(View):
 
         data = Case.objects.filter(id = id)
         
-        
         try:
-            if(title != data[0].title.replace(' ', '_')):
+            if(titleForURL != translit(data[0].title.replace(' ', '_'), language_code='ru', reversed=True)):
                 return redirect('error')
         except:
             return redirect('error')   
 
-        
         context = {
-            'title': title,
+            'titleForURL': titleForURL,
             'data' : data
         }
         return render(request, "cases/caseObject/caseObject.html", context=context)

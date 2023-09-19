@@ -18,7 +18,7 @@
 
         {% for obj in cases %}
            
-            <a href='{% url "casePage" id=obj.id title=obj.title %}' class="col-4 p-1 mt-5" style="text-decoration:none;">
+            <a href='{% url "casePage" id=obj.id titleForURL=obj.titleForURL %}' class="col-4 p-1 mt-5" style="text-decoration:none;">
                 
                 <div class="card text-bg-dark" >
                     <img src="/media/{{ obj.img }}" style="width: 100px; height: 100px;">
@@ -32,10 +32,10 @@
 
             </a>    
          
-            <script>
+            <!-- <script>
                 var str = document.getElementById("{{ obj.id }}").innerHTML
                 document.getElementById("{{ obj.id }}").innerHTML=str.replaceAll('_', ' ');
-            </script>
+            </script> -->
         {% endfor %}
        
     </div>
