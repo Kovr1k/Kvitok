@@ -14,10 +14,7 @@ class Cases(View):
         
         i=0
         for el in cases:
-            # cases[i].titleForURL = cases[i].title.replace(' ', '_')
-            cases[i].titleForURL = translit(cases[i].title.replace(' ', '_'), language_code='ru', reversed=True)
-            print(cases[i].titleForURL)
-            print(cases[i].id)
+            cases[i].titleForURL = translit(cases[i].title.replace(' ', '-'), language_code='ru', reversed=True)
             i += 1      
             
         data = {
@@ -45,7 +42,7 @@ class CasePage(View):
         data = Case.objects.filter(id = id)
         
         try:
-            if(titleForURL != translit(data[0].title.replace(' ', '_'), language_code='ru', reversed=True)):
+            if(titleForURL != translit(data[0].title.replace(' ', '-'), language_code='ru', reversed=True)):
                 return redirect('error')
         except:
             return redirect('error')   

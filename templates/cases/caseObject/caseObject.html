@@ -8,6 +8,9 @@
     <link rel="stylesheet" href="{% static 'css/cases/cases.css' %}">
 
     Хуй
+    {% for obj in data %}
+        {% autoescape off %}{{obj.description | linebreaks }}{% endautoescape %}
+    {% endfor %}
 
     <!-- {% if user.is_authenticated  %}
     
