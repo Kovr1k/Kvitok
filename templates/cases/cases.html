@@ -6,6 +6,18 @@
 {% load static %}
 
     <link rel="stylesheet" href="{% static 'css/cases/cases.css' %}">
+    <!-- {% if user.is_authenticated  %}
+    
+    {% else %}
+
+    {% endif %} -->
+    
+    <div class="page_header">Кейсы</div>
+    <div class="page_links">
+        <a href="/">Главная страница</a>
+        <span class="page_arrow">=></span>
+        <a href="/cases">кейсы</a>
+    </div>
 
     <div class="content">
         <div class="page_header h-1">Кейсы</div>
@@ -13,6 +25,25 @@
             <a href="/">Главная страница</a>
             <span class="page_arrow">→</span>
             <a href="/cases">кейсы</a>
+        </div>
+
+        <div class="cases_grid">
+            {% for obj in cases %}
+            
+                <a href='{% url "casePage" id=obj.id titleForURL=obj.titleForURL %}' class="col-4 p-1 mt-5" style="text-decoration:none;">
+                    
+                    <div class="cases_img">
+                        <!-- <img src="/media/{{ obj.img }}" height="294px"> -->
+                    </div>
+
+                    <div class="text-center" style="height: 15vh;">
+                        <h5 class="text-center" id="{{ obj.id }}" style="color: black;">{{ obj.title }}</h5>   
+                    </div>
+
+                </a>    
+            
+            {% endfor %}
+        
         </div>
 
         <div class="cases_grid">

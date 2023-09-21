@@ -14,6 +14,21 @@
     font-family: 'RG-Standard';
     src: url("/static/fonts/RG-StandardBold.ttf");
     font-weight: 900;
+    font-family: 'RG-Standard';
+    src: url("/static/fonts/RG-StandardBook.ttf");
+    font-weight: 500;
+}
+
+@font-face {
+    font-family: 'RG-Standard';
+    src: url("/static/fonts/RG-StandardMedium.ttf");
+    font-weight: 700;
+}
+
+@font-face {
+    font-family: 'RG-Standard';
+    src: url("/static/fonts/RG-StandardBold.ttf");
+    font-weight: 900;
 }
 
 body {
