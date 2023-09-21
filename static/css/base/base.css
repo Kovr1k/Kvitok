@@ -1,0 +1,10 @@
+@font-face {
+    font-family: 'abc';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Random Grotesque Standard Book'), url('RG-StandardBook.ttf') format('opentype');
+}
+
+body {
+    font-family: 'abc';
+}
