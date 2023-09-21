@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from django.http import HttpResponse
-from .models import Case
+from .models import Case, CaseBlock
 from transliterate import translit, get_available_language_codes
 
 class Main(View):
@@ -36,10 +36,12 @@ class CasePage(View):
         titleForURL = str(titleForURL)
         data = None
 
+
         if(id == None):
             return redirect('error')
 
         data = Case.objects.filter(id = id)
+        caseBlocks = CaseBlock.objects.filter(fk = id)
         
         try:
             if(titleForURL != translit(data[0].title.replace(' ', '-'), language_code='ru', reversed=True)):
@@ -49,6 +51,7 @@ class CasePage(View):
 
         context = {
             'titleForURL': titleForURL,
-            'data' : data
+            'data' : data,
+            'caseBlocks': caseBlocks
         }
         return render(request, "cases/caseObject/caseObject.html", context=context)
