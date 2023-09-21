@@ -7,16 +7,26 @@
 
     <link rel="stylesheet" href="{% static 'css/cases/cases.css' %}">
 
-    Хуй
+    
 
     <!-- {% if user.is_authenticated  %}
     
     {% else %}
 
     {% endif %} -->
+
+    {% for el in data %}
+    <form enctype="multipart/form-data" method="post">
+        {% csrf_token %}
+        <p><input type="file" name="img">
+        <input type="submit" value="Отправить"></p>
+       </form> 
+    
+        <!-- {% autoescape off %}{{ el.description | linebreaks }}{% endautoescape %} -->
+    {% endfor %}
     
     {% for obj in caseBlocks %}
-          
+
         {% if obj.type == 1 %}
             {{ obj.text }}
         {% endif %}

@@ -15,7 +15,41 @@
             <a href="/cases">блог</a>
         </div>
 
-        {% if user.is_authenticated  %}
+    {% if user.is_authenticated  %}
+
+        {% for obj in news %}
+            <div style="margin-right: 40%; margin-top: 30px; margin-left: 10%; margin-bottom: 30px; background-color: rgba(184, 184, 184, 0.671); border: 3px solid;">
+                <div class="text-center">
+                    <p style="color: black;">{{ obj.date }}</p>
+                    <h5 class="text-center" style="color: black;">{{ obj.title }}</h5>   
+                </div>
+
+                {% if obj.img_1 != "" %}
+                    <img src="/media/{{ obj.img_1 }}" style="width: 100px; height: 100px;">
+                {% endif %}
+
+                {% if obj.img_2 != "" %}
+                    <img src="/media/{{ obj.img_2 }}" style="width: 100px; height: 100px;">
+                {% endif %}
+
+                {% if obj.img_3 != "" %}
+                    <img src="/media/{{ obj.img_3 }}" style="width: 100px; height: 100px;">
+                {% endif %}
+
+                {% if obj.img_4 != "" %}
+                    <img src="/media/{{ obj.img_4 }}" style="width: 100px; height: 100px;">
+                {% endif %}
+
+                {% if obj.img_5 != "" %}
+                    <img src="/media/{{ obj.img_5 }}" style="width: 100px; height: 100px;">
+                {% endif %}
+
+                <div class="text-center" style="height: 15vh;">
+                    <p class="text-center" style="color: black;">{{ obj.text }}</p>   
+                </div>
+            </div>
+            
+        {% endfor %}
     
         <div class="blog_page">
             <div class="blog_img">
@@ -34,6 +68,8 @@
     </div>
 
     {% else %}
+
+    
 
     {% endif %}
     

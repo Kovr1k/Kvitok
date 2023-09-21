@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from django.http import HttpResponse
-from .models import Case, CaseBlock
+from .models import Case, CaseBlock, New
 from transliterate import translit, get_available_language_codes
 
 class Main(View):
@@ -24,7 +24,13 @@ class Cases(View):
     
 class Blog(View):
     def get(self, request):
-        return render(request, "blog/blog.html")
+        news = New.objects.all()
+
+        data = {
+            'news': news,
+        }
+
+        return render(request, "blog/blog.html", data)
     
 class Error(View):
     def get(self, request):
@@ -32,6 +38,30 @@ class Error(View):
         
 class CasePage(View):
     def get(self, request, id, titleForURL):
+        id = int(id)
+        titleForURL = str(titleForURL)
+        data = None
+
+
+        if(id == None):
+            return redirect('error')
+
+        data = Case.objects.filter(id = id)
+        caseBlocks = CaseBlock.objects.filter(fk = id)
+        
+        try:
+            if(titleForURL != translit(data[0].title.replace(' ', '-'), language_code='ru', reversed=True)):
+                return redirect('error')
+        except:
+            return redirect('error')   
+
+        context = {
+            'titleForURL': titleForURL,
+            'data' : data,
+            'caseBlocks': caseBlocks
+        }
+        return render(request, "cases/caseObject/caseObject.html", context=context)
+    def post(self, request, id, titleForURL):
         id = int(id)
         titleForURL = str(titleForURL)
         data = None
