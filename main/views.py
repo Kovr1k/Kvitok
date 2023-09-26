@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.views.generic.base import View
 from django.http import HttpResponse
-from .models import Case, CaseBlock
+from .models import Case, CaseBlock, New
 from transliterate import translit, get_available_language_codes
 
 class Main(View):
@@ -24,7 +24,13 @@ class Cases(View):
     
 class Blog(View):
     def get(self, request):
-        return render(request, "blog/blog.html")
+        news = New.objects.all()
+
+        data = {
+            'news': news,
+        }
+
+        return render(request, "blog/blog.html", data)
     
 class Error(View):
     def get(self, request):

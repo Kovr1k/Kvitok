@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Case, CaseBlock
+from .models import Case, CaseBlock, New
 
 # class TestCase(admin.ModelAdmin):
 #     description = ('date_started',),
@@ -7,3 +7,4 @@ from .models import Case, CaseBlock
 
 admin.site.register(Case)
 admin.site.register(CaseBlock)
+admin.site.register(New)
