@@ -7,16 +7,16 @@
 
     <link rel="stylesheet" href="{% static 'css/blog/blog.css' %}">
 
-    <div class="page_header">Блог</div>
-    <div class="page_links">
-        <a href="/">Главная страница</a>
-        <span class="page_arrow">=></span>
-        <a href="/cases">блог</a>
-    </div>
-
-    {% if user.is_authenticated  %}
-    
     <div class="content">
+        <div class="page_header h-1">Блог</div>
+        <div class="page_links">
+            <a href="/">Главная страница</a>
+            <span class="page_arrow">=></span>
+            <a href="/cases">блог</a>
+        </div>
+
+        {% if user.is_authenticated  %}
+    
         <div class="blog_page">
             <div class="blog_img">
                 <img src="https://placehold.co/600x400" alt="">
