@@ -61,3 +61,27 @@ class CasePage(View):
             'caseBlocks': caseBlocks
         }
         return render(request, "cases/caseObject/caseObject.html", context=context)
+    def post(self, request, id, titleForURL):
+        id = int(id)
+        titleForURL = str(titleForURL)
+        data = None
+
+
+        if(id == None):
+            return redirect('error')
+
+        data = Case.objects.filter(id = id)
+        caseBlocks = CaseBlock.objects.filter(fk = id)
+        
+        try:
+            if(titleForURL != translit(data[0].title.replace(' ', '-'), language_code='ru', reversed=True)):
+                return redirect('error')
+        except:
+            return redirect('error')   
+
+        context = {
+            'titleForURL': titleForURL,
+            'data' : data,
+            'caseBlocks': caseBlocks
+        }
+        return render(request, "cases/caseObject/caseObject.html", context=context)
